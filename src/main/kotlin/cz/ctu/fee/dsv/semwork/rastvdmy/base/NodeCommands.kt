@@ -3,6 +3,8 @@ package cz.ctu.fee.dsv.semwork.rastvdmy.base
 import java.rmi.Remote
 import java.rmi.RemoteException
 
+/* Source: https://moodle.fel.cvut.cz/pluginfile.php/410384/mod_label/intro/TestSem_v0.1.zip */
+
 interface NodeCommands : Remote {
     @Throws(RemoteException::class)
     fun join(addr: Address?): DSNeighbours?

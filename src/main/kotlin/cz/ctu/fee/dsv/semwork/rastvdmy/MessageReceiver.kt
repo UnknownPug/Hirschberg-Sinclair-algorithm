@@ -5,6 +5,8 @@ import cz.ctu.fee.dsv.semwork.rastvdmy.base.DSNeighbours
 import cz.ctu.fee.dsv.semwork.rastvdmy.base.NodeCommands
 import java.rmi.RemoteException
 
+/* Source: https://moodle.fel.cvut.cz/pluginfile.php/410384/mod_label/intro/TestSem_v0.1.zip */
+
 class MessageReceiver(node: Node?) : NodeCommands {
     private var myNode: Node? = null
     private var nResp = 0

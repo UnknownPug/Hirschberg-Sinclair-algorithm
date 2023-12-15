@@ -5,16 +5,16 @@ import java.io.IOException
 import java.io.InputStreamReader
 import java.io.PrintStream
 
+/* Source: https://moodle.fel.cvut.cz/pluginfile.php/410384/mod_label/intro/TestSem_v0.1.zip */
+
 class ConsoleHandler(private val myNode: Node) : Runnable {
     private var reading = true
     private var reader: BufferedReader? = null
     private val err: PrintStream = System.err
 
-
     init {
         reader = BufferedReader(InputStreamReader(System.`in`))
     }
-
 
     private fun parseCommandline(commandline: String) {
         when (commandline) {

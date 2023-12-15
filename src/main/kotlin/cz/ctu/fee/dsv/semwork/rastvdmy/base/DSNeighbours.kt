@@ -2,6 +2,8 @@ package cz.ctu.fee.dsv.semwork.rastvdmy.base
 
 import java.io.Serializable
 
+/* Source: https://moodle.fel.cvut.cz/pluginfile.php/410384/mod_label/intro/TestSem_v0.1.zip */
+
 class DSNeighbours : Serializable {
 
     @JvmField

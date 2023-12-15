@@ -8,6 +8,8 @@ import java.rmi.registry.LocateRegistry
 import java.rmi.server.UnicastRemoteObject
 import kotlin.system.exitProcess
 
+/* Source: https://moodle.fel.cvut.cz/pluginfile.php/410384/mod_label/intro/TestSem_v0.1.zip */
+
 class Node(args: Array<String>) : Runnable {
 
     // Node state

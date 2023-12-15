@@ -7,6 +7,8 @@ import java.rmi.NotBoundException
 import java.rmi.RemoteException
 import java.rmi.registry.LocateRegistry
 
+/* Source: https://moodle.fel.cvut.cz/pluginfile.php/410384/mod_label/intro/TestSem_v0.1.zip */
+
 class CommunicationHub(node: Node?) {
     private var actNeighbours: DSNeighbours? = null
     private var myAddress: Address? = null
@@ -19,7 +21,6 @@ class CommunicationHub(node: Node?) {
         this.actNeighbours = node.neighbours
         this.myMessageReceiver = node.messageReceiver
     }
-
 
     @get:Throws(RemoteException::class)
     val next: NodeCommands?
@@ -58,6 +59,4 @@ class CommunicationHub(node: Node?) {
     fun setActNeighbours(actNeighbours: DSNeighbours?) {
         this.actNeighbours = actNeighbours
     }
-
-
 }

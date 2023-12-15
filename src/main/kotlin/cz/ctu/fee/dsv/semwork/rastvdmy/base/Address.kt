@@ -2,6 +2,8 @@ package cz.ctu.fee.dsv.semwork.rastvdmy.base
 
 import java.io.Serializable
 
+/* Source: https://moodle.fel.cvut.cz/pluginfile.php/410384/mod_label/intro/TestSem_v0.1.zip */
+
 class Address @JvmOverloads constructor(
     @JvmField var hostname: String = "127.0.0.1",
     @JvmField var port: Int = 2010
