@@ -7,35 +7,35 @@ import java.io.Serializable
 class DSNeighbours : Serializable {
 
     @JvmField
-    var next: Address
+    var right: Address
     @JvmField
     var nNext: Address
     @JvmField
-    var prev: Address
+    var left: Address
     @JvmField
     var leader: Address
 
 
     constructor(me: Address) {
-        this.next = me
+        this.right = me
         this.nNext = me
-        this.prev = me
+        this.left = me
         this.leader = me
     }
 
 
-    constructor(next: Address, nNext: Address, prev: Address, leader: Address) {
-        this.next = next
+    constructor(right: Address, nNext: Address, left: Address, leader: Address) {
+        this.right = right
         this.nNext = nNext
-        this.prev = prev
+        this.left = left
         this.leader = leader
     }
 
 
     override fun toString(): String {
-        return ("Neigh[next:'" + next + "', " +
+        return ("Neigh[right:'" + right + "', " +
                 "nNext:'" + nNext + "', " +
-                "prev:'" + prev + "', " +
+                "left:'" + left + "', " +
                 "leader:'" + leader + "']")
     }
 }

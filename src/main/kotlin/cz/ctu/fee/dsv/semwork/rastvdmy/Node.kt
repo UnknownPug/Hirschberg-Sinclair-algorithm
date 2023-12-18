@@ -33,7 +33,6 @@ class Node(args: Array<String>) : Runnable {
     var commHub: CommunicationHub? = null
         private set
     private var myConsoleHandler: ConsoleHandler? = null
-
     private var repairInProgress: Boolean = false
 
     init {
@@ -151,7 +150,7 @@ class Node(args: Array<String>) : Runnable {
             repairInProgress = true
             run {
                 try {
-                    messageReceiver!!.nodeMissing(neighbours!!.next)
+                    messageReceiver!!.nodeMissing(neighbours!!.right)
                 } catch (e: RemoteException) {
                     // this should not happen
                     e.printStackTrace()
@@ -164,9 +163,10 @@ class Node(args: Array<String>) : Runnable {
             try {
                 commHub!!.leader!!.hello()
             } catch (e: RemoteException) {
-                // Leader is dead -> start Election with a new chosen candidate to become a leader
+                println("Leader is dead -> start Candidature with a new chosen candidate to become a leader")
                 try {
-                    messageReceiver!!.election(-1)
+                    messageReceiver!!.candidature(-1, 0, 1, address!!) // TODO: Think about this!!!
+//                    messageReceiver!!.election(-1)
                 } catch (ex: RemoteException) {
                     ex.printStackTrace()
                 }
@@ -177,10 +177,10 @@ class Node(args: Array<String>) : Runnable {
     fun sendHelloToBoth() {
         println("Sending Hello to both neighbours")
         try {
-            println("Sending Hello to ${commHub!!.next}}")
-            commHub!!.next!!.hello()
-            println("Sending Hello to ${commHub!!.prev}}")
-            commHub!!.prev!!.hello()
+            println("Sending Hello to ${commHub!!.right}}")
+            commHub!!.right!!.hello()
+            println("Sending Hello to ${commHub!!.left}}")
+            commHub!!.left!!.hello()
         } catch (e: RemoteException) {
             repairTopology()
         }

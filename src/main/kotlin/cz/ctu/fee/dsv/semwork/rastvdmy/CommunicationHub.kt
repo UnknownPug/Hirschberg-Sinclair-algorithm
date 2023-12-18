@@ -23,8 +23,8 @@ class CommunicationHub(node: Node?) {
     }
 
     @get:Throws(RemoteException::class)
-    val next: NodeCommands?
-        get() = getRMIProxy(actNeighbours!!.next)
+    val right: NodeCommands?
+        get() = getRMIProxy(actNeighbours!!.right)
 
 
     @get:Throws(RemoteException::class)
@@ -33,13 +33,17 @@ class CommunicationHub(node: Node?) {
 
 
     @get:Throws(RemoteException::class)
-    val prev: NodeCommands?
-        get() = getRMIProxy(actNeighbours!!.prev)
+    val left: NodeCommands?
+        get() = getRMIProxy(actNeighbours!!.left)
 
 
     @get:Throws(RemoteException::class)
     val leader: NodeCommands?
         get() = getRMIProxy(actNeighbours!!.leader)
+
+    @get:Throws(RemoteException::class)
+    val current: NodeCommands?
+        get() = getRMIProxy(myAddress!!)
 
 
     @Throws(RemoteException::class)

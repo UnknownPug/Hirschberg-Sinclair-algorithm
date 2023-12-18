@@ -23,13 +23,13 @@ interface NodeCommands : Remote {
     fun election(id: Long)
 
     @Throws(RemoteException::class)
-    fun candidature(id: Long, minDepth: Int, maxDepth: Int)
+    fun candidature(leaderId: Long, minDepth: Int, maxDepth: Int, senderAddress: Address)
 
     @Throws(RemoteException::class)
-    fun response(b: Boolean, id: Long, address: Address)
+    fun response(b: Boolean, id: Long, senderAddress: Address)
 
     @Throws(RemoteException::class)
-    fun elected(id: Long)
+    fun elected(winner: Long, senderAddress: Address)
 
     @Throws(RemoteException::class)
     fun sendMessage(toNickName: String?, fromNickName: String?, message: String?)

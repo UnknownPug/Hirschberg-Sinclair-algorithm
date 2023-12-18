@@ -11,6 +11,7 @@ class MessageReceiver(node: Node?) : NodeCommands {
     private var myNode: Node? = null
     private var nResp = 0
     private var respOK = true
+    private var winner: Long = 0
 
     init {
         this.myNode = node
@@ -25,22 +26,22 @@ class MessageReceiver(node: Node?) : NodeCommands {
         } else {
             println("Someone is joining ...")
             val myNeighbours = myNode!!.neighbours
-            val myInitialNext = Address(myNeighbours!!.next) // because of 2 nodes config
-            val myInitialPrev = Address(myNeighbours.prev) // because of 2 nodes config
+            val myInitialNext = Address(myNeighbours!!.right) // because of 2 nodes config
+            val myInitialPrev = Address(myNeighbours.left) // because of 2 nodes config
             val tmpNeighbours = DSNeighbours(
-                myNeighbours.next,
+                myNeighbours.right,
                 myNeighbours.nNext,
                 myNode!!.address!!,
                 myNeighbours.leader
             )
             // to my next send msg ChPrev to addr
-            myNode!!.commHub!!.next!!.changePrev(addr)
+            myNode!!.commHub!!.right!!.changePrev(addr)
             // to my prev send msg ChNNext addr
             myNode!!.commHub!!.getRMIProxy(myInitialPrev)!!.changeNNext(addr)
             tmpNeighbours.nNext = myNeighbours.nNext
             // handle myself
             myNeighbours.nNext = myInitialNext
-            myNeighbours.next = addr
+            myNeighbours.right = addr
             return tmpNeighbours
         }
     }
@@ -56,30 +57,30 @@ class MessageReceiver(node: Node?) : NodeCommands {
     @Throws(RemoteException::class)
     override fun changePrev(addr: Address?): Address {
         println("ChangePrev was called ...")
-        myNode!!.neighbours!!.prev = addr!!
-        return myNode!!.neighbours!!.next
+        myNode!!.neighbours!!.left = addr!!
+        return myNode!!.neighbours!!.right
     }
 
 
     @Throws(RemoteException::class)
     override fun nodeMissing(addr: Address?) {
         println("NodeMissing was called with $addr")
-        if (addr!!.compareTo(myNode!!.neighbours!!.next) == 0) {
+        if (addr!!.compareTo(myNode!!.neighbours!!.right) == 0) {
             // It's for me
             val myNeighbours = myNode!!.neighbours
             // to my nnext send msg ChPrev with myaddr -> my nnext = next
-            myNeighbours!!.next = myNeighbours.nNext
+            myNeighbours!!.right = myNeighbours.nNext
             myNeighbours.nNext = myNode!!.commHub!!.nNext!!.changePrev(myNode!!.address)!!
             // to my prev send msg ChNNext to my.next
-            myNode!!.commHub!!.prev!!.changeNNext(myNeighbours.next)
+            myNode!!.commHub!!.left!!.changeNNext(myNeighbours.right)
             println("NodeMissing DONE")
         } else {
             // send to the next node
-            myNode!!.commHub!!.next!!.nodeMissing(addr)
+            myNode!!.commHub!!.right!!.nodeMissing(addr)
         }
     }
 
-
+    @Synchronized
     @Throws(RemoteException::class)
     override fun election(id: Long) {
         myNode!!.state = State.CANDIDATE
@@ -88,10 +89,12 @@ class MessageReceiver(node: Node?) : NodeCommands {
         while (myNode!!.state == State.CANDIDATE) {
             nResp = 0
             respOK = true
-            myNode!!.commHub!!.getRMIProxy(myNode!!.address!!)!!.candidature(id, 0, maxDepth)
+            myNode!!.commHub!!.left!!.candidature(id, 0, maxDepth, myNode!!.address!!)
+            myNode!!.commHub!!.right!!.candidature(id, 0, maxDepth, myNode!!.address!!)
             waitUntil { nResp == 2 }
             if (!respOK) {
                 myNode!!.state = State.LOST
+                break // Declares himself as LOST and does nothing more
             }
             maxDepth *= 2
         }
@@ -103,61 +106,75 @@ class MessageReceiver(node: Node?) : NodeCommands {
         }
     }
 
+    @Synchronized
     @Throws(RemoteException::class)
-    override fun candidature(id: Long, minDepth: Int, maxDepth: Int) {
-        println("Candidature was called with id $id")
-        if (id < myNode!!.nodeId) {
-            // Respond to the next and prev
-            myNode!!.commHub!!.next!!.response(false, id, myNode!!.address!!)
-            myNode!!.commHub!!.prev!!.response(false, id, myNode!!.address!!)
+    override fun candidature(leaderId: Long, minDepth: Int, maxDepth: Int, senderAddress: Address) {
+        val calledNodeId = myNode!!.nodeId
+
+        println("Candidature was called with id $leaderId")
+        if (calledNodeId > leaderId) {
+            println("Leader $leaderId is not a candidate. Sending response to leader ...")
+            myNode!!.commHub!!.getRMIProxy(senderAddress)!!
+                .response(false, leaderId, senderAddress) // FIXME: LOOPING HERE!!!
             if (myNode!!.state == State.NOT_INVOLVED) {
-                election(myNode!!.nodeId)
+                println("Node $calledNodeId was not involved in election before. Starting new election ...")
+                election(calledNodeId)
             }
         }
-        if (id > myNode!!.nodeId) {
+        if (calledNodeId < leaderId) {
             myNode!!.state = State.LOST
             val newMinDepth = minDepth + 1
             println("New minimal depth is $newMinDepth")
             if (newMinDepth < maxDepth) {
-                myNode!!.commHub!!.getRMIProxy(myNode!!.address!!)!!.candidature(id, newMinDepth, maxDepth)
+                sendPassCandidature(leaderId, newMinDepth, maxDepth, senderAddress)
             } else {
-                // Respond to the next and prev
-                myNode!!.commHub!!.next!!.response(true, id, myNode!!.address!!)
-                myNode!!.commHub!!.prev!!.response(true, id, myNode!!.address!!)
+                myNode!!.commHub!!.getRMIProxy(senderAddress)!!.response(true, leaderId, myNode!!.address!!)
             }
         }
-        if (id == myNode!!.nodeId) {
-            if (myNode!!.state == State.ELECTED) {
+        if (leaderId == calledNodeId) {
+            if (myNode!!.state != State.ELECTED) {
+                println("STATE ELECTED")
                 myNode!!.state = State.ELECTED
             }
-
-            // I am the winner (myNode.nodeId)
-            myNode!!.neighbours!!.leader = myNode!!.address!!
+            winner = calledNodeId
             // Notify the next and prev that I am the winner
-            myNode!!.commHub!!.next!!.elected(myNode!!.nodeId)
-            myNode!!.commHub!!.prev!!.elected(myNode!!.nodeId)
+            getProxyToPassMessage(senderAddress).elected(winner, myNode!!.address!!)
         }
     }
 
+    @Synchronized
     @Throws(RemoteException::class)
-    override fun response(b: Boolean, id: Long, address: Address) {
-        println("Response was called with b $b, id $id and address $address")
-        if (id == myNode!!.nodeId) {
+    override fun response(b: Boolean, id: Long, senderAddress: Address) {
+        println("Response was called with b $b, id $id and sender address $senderAddress")
+        if (myNode!!.nodeId == id) {
             nResp++
-            respOK = respOK && b
+            respOK = respOK && b // If it gets true and if it gets true
         } else {
-            myNode!!.commHub!!.getRMIProxy(address)!!.response(b, myNode!!.nodeId, address)
+            getProxyToPassMessage(senderAddress)
         }
     }
 
+    @Synchronized
     @Throws(RemoteException::class)
-    override fun elected(id: Long) {
-        println("Elected was called with id $id")
-        if (myNode!!.nodeId != id) {
-            myNode!!.commHub!!.getRMIProxy(myNode!!.address!!)!!.elected(id)
-            myNode!!.nodeId = id
+    override fun elected(winner: Long, senderAddress: Address) {
+        println("Elected was called with id $winner")
+        if (winner != myNode!!.nodeId) {
+            getProxyToPassMessage(senderAddress).elected(winner, myNode!!.address!!)
+            this.winner = winner
             myNode!!.state = State.NOT_INVOLVED
         }
+    }
+
+    private fun getProxyToPassMessage(senderAddress: Address): NodeCommands {
+        return if (senderAddress == myNode!!.neighbours!!.right) {
+            myNode!!.commHub!!.getRMIProxy(myNode!!.neighbours!!.left)!!
+        } else {
+            myNode!!.commHub!!.getRMIProxy(myNode!!.neighbours!!.right)!!
+        }
+    }
+
+    private fun sendPassCandidature(leaderId: Long, newMinDepth: Int, maxDepth: Int, senderAddress: Address) {
+        getProxyToPassMessage(senderAddress).candidature(leaderId, newMinDepth, maxDepth, myNode!!.address!!)
     }
 
     @Throws(RemoteException::class)
