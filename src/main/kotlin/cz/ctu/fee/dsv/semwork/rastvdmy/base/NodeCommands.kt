@@ -26,10 +26,10 @@ interface NodeCommands : Remote {
     fun candidature(leaderId: Long, minDepth: Int, maxDepth: Int, senderAddress: Address)
 
     @Throws(RemoteException::class)
-    fun response(b: Boolean, id: Long, senderAddress: Address)
+    fun response(isPositiveResponse: Boolean, id: Long, senderAddress: Address)
 
     @Throws(RemoteException::class)
-    fun elected(winner: Long, senderAddress: Address)
+    fun elected(winner: Long, winnerAddress: Address, senderAddress: Address)
 
     @Throws(RemoteException::class)
     fun sendMessage(toNickName: String?, fromNickName: String?, message: String?)

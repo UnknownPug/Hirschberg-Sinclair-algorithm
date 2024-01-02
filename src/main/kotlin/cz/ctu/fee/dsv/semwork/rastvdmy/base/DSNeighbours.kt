@@ -6,14 +6,26 @@ import java.io.Serializable
 
 class DSNeighbours : Serializable {
 
-    @JvmField
     var right: Address
-    @JvmField
+        set(value) {
+            println("right set to $value")
+            field = value
+        }
     var nNext: Address
-    @JvmField
+        set(value) {
+            println("nNext set to $value")
+            field = value
+        }
     var left: Address
-    @JvmField
+        set(value) {
+            println("left set to $value")
+            field = value
+        }
     var leader: Address
+        set(value) {
+            println("leader set to $value")
+            field = value
+        }
 
 
     constructor(me: Address) {

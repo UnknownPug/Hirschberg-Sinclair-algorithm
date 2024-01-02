@@ -24,7 +24,7 @@ class Node(args: Array<String>) : Runnable {
 
     // Node Id
     var nodeId: Long = 0
-    var address: Address? = null
+    var proxiedAddress: Address? = null
         private set
     var neighbours: DSNeighbours? = null
         private set
@@ -45,6 +45,7 @@ class Node(args: Array<String>) : Runnable {
                 otherNodePort = args[2].toInt()
                 myPort = otherNodePort
             }
+
             5 -> {
                 nickname = args[0]
                 myIP = args[1]
@@ -52,6 +53,7 @@ class Node(args: Array<String>) : Runnable {
                 otherNodeIP = args[3]
                 otherNodePort = args[4].toInt()
             }
+
             else -> {
                 // something is wrong - use default values
                 System.err.println("Wrong number of commandline parameters - using default values.")
@@ -79,21 +81,21 @@ class Node(args: Array<String>) : Runnable {
     }
 
     private fun startMessageReceiver(): NodeCommands? {
-        if (address == null) {
+        if (proxiedAddress == null) {
             System.err.println("Message listener - myAddress is null.")
             return null
         }
-        System.setProperty("java.rmi.server.hostname", address!!.hostname)
+        System.setProperty("java.rmi.server.hostname", proxiedAddress!!.hostname)
 
         var msgReceiver: NodeCommands? = null
         try {
             msgReceiver = MessageReceiver(this)
 
             // Create instance of a remote object and its skeleton
-            val skeleton = UnicastRemoteObject.exportObject(msgReceiver, 40000 + address!!.port) as NodeCommands
+            val skeleton = UnicastRemoteObject.exportObject(msgReceiver, 40000 + proxiedAddress!!.port) as NodeCommands
 
             // Create registry and (re)register object name and skeleton in it
-            val registry = LocateRegistry.createRegistry(address!!.port)
+            val registry = LocateRegistry.createRegistry(proxiedAddress!!.port)
             registry.rebind(COMM_INTERFACE_NAME, skeleton)
         } catch (e: Exception) {
             // Something is wrong ...
@@ -116,74 +118,43 @@ class Node(args: Array<String>) : Runnable {
 
 
     fun printStatus() {
-        println("Status: $this with address $address")
+        println("Status: $this with address $proxiedAddress")
         println("    with neighbours $neighbours")
     }
 
 
     override fun run() {
         nodeId = generateId(myIP, myPort)
-        address = Address(myIP, myPort)
-        neighbours = DSNeighbours(address!!)
+        proxiedAddress = Address(myIP, myPort)
+        neighbours = DSNeighbours(proxiedAddress!!)
         printStatus()
         messageReceiver = startMessageReceiver()
         commHub = CommunicationHub(this)
         myConsoleHandler = ConsoleHandler(this)
         // JOIN
-        run {
-            try {
-                val tmpNode = commHub!!.getRMIProxy(Address(otherNodeIP, otherNodePort))
-                this.neighbours = tmpNode!!.join(this.address)
-                commHub!!.setActNeighbours(this.neighbours)
-            } catch (e: RemoteException) {
-                e.printStackTrace()
-                exitProcess(1)
-            }
-            println("Neighbours after JOIN " + this.neighbours)
-        }
+        val tmpNode = commHub!!.getRMIProxy(Address(otherNodeIP, otherNodePort))
+        this.neighbours = tmpNode!!.join(this.proxiedAddress)
+        commHub!!.setActNeighbours(this.neighbours)
+        println("Neighbours after JOIN " + this.neighbours)
         Thread(myConsoleHandler).start()
     }
 
-
-    private fun repairTopology() {
+    fun repairTopology(missingAddress: Address) {
         if (!repairInProgress) {
             repairInProgress = true
-            run {
-                try {
-                    messageReceiver!!.nodeMissing(neighbours!!.right)
-                } catch (e: RemoteException) {
-                    // this should not happen
-                    e.printStackTrace()
-                }
-                println("Topology was repaired " + this.neighbours)
-            }
+            messageReceiver!!.nodeMissing(missingAddress)
+            println("Topology was repaired " + this.neighbours)
             repairInProgress = false
 
-            // test leader
-            try {
-                commHub!!.leader!!.hello()
-            } catch (e: RemoteException) {
-                println("Leader is dead -> start Candidature with a new chosen candidate to become a leader")
-                try {
-                    messageReceiver!!.candidature(-1, 0, 1, address!!) // TODO: Think about this!!!
-//                    messageReceiver!!.election(-1)
-                } catch (ex: RemoteException) {
-                    ex.printStackTrace()
-                }
-            }
         }
     }
 
     fun sendHelloToBoth() {
         println("Sending Hello to both neighbours")
-        try {
-            println("Sending Hello to ${commHub!!.right}}")
-            commHub!!.right!!.hello()
-            println("Sending Hello to ${commHub!!.left}}")
-            commHub!!.left!!.hello()
-        } catch (e: RemoteException) {
-            repairTopology()
-        }
+        println("Sending Hello to ${commHub!!.right}}")
+        commHub!!.right!!.hello()
+        println("Sending Hello to ${commHub!!.left}}")
+        commHub!!.left!!.hello()
     }
 
     companion object {
