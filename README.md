@@ -110,9 +110,9 @@ So the sequence of launching nodes should be as follows:
 
 After running the application, we can use next console commands:
 
-1) ```shell
-    h
-    ```
+ ```shell
+ h
+ ```
 
 It will send "Hello" message to the neighbours, which is left and right nodes.
 
@@ -127,9 +127,9 @@ Sending node:
 
 Receiving node: ```Hello was called ...```
 
-2) ```shell
-   s
-   ```
+```shell
+s
+```
 
 It will show statistics of the node, from which we called it.
 
@@ -145,9 +145,9 @@ Example:
             left:'Addr[host:'127.0.0.1', port:'2040']', 
             leader:'Addr[host:'127.0.0.1', port:'2050']']
 
-3) ```shell
-   ?
-    ```
+```shell
+?
+```
 It will show all available commands.
 
 Example:
@@ -157,7 +157,7 @@ Example:
         h - send Hello message to both neighbours
         s - print node status
 
-4) If we will another non-existing command, we will get a message ```Unrecognized command.``` 
+If we will another non-existing command, we will get a message ```Unrecognized command.``` 
 
 -- -- --
 Thank you for your attention! Happy coding :-)
