@@ -80,7 +80,7 @@ Program arguments: Bob 127.0.0.1 2020 127.0.0.1 2010
 3)
 Name: Node 2030
 Main class: cz.ctu.fee.dsv.semwork.rastvdmy.Node
-Program arguments: Cecil
+Program arguments: Cecil 127.0.0.1 2030 127.0.0.1 2020
 
 4)
 Name: Node 2040
