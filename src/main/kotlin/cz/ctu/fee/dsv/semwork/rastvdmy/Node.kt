@@ -3,10 +3,8 @@ package cz.ctu.fee.dsv.semwork.rastvdmy
 import cz.ctu.fee.dsv.semwork.rastvdmy.base.Address
 import cz.ctu.fee.dsv.semwork.rastvdmy.base.DSNeighbours
 import cz.ctu.fee.dsv.semwork.rastvdmy.base.NodeCommands
-import java.rmi.RemoteException
 import java.rmi.registry.LocateRegistry
 import java.rmi.server.UnicastRemoteObject
-import kotlin.system.exitProcess
 
 /* Source: https://moodle.fel.cvut.cz/pluginfile.php/410384/mod_label/intro/TestSem_v0.1.zip */
 
@@ -24,7 +22,7 @@ class Node(args: Array<String>) : Runnable {
 
     // Node Id
     var nodeId: Long = 0
-    var proxiedAddress: Address? = null
+    var address: Address? = null
         private set
     var neighbours: DSNeighbours? = null
         private set
@@ -81,21 +79,21 @@ class Node(args: Array<String>) : Runnable {
     }
 
     private fun startMessageReceiver(): NodeCommands? {
-        if (proxiedAddress == null) {
+        if (address == null) {
             System.err.println("Message listener - myAddress is null.")
             return null
         }
-        System.setProperty("java.rmi.server.hostname", proxiedAddress!!.hostname)
+        System.setProperty("java.rmi.server.hostname", address!!.hostname)
 
         var msgReceiver: NodeCommands? = null
         try {
             msgReceiver = MessageReceiver(this)
 
             // Create instance of a remote object and its skeleton
-            val skeleton = UnicastRemoteObject.exportObject(msgReceiver, 40000 + proxiedAddress!!.port) as NodeCommands
+            val skeleton = UnicastRemoteObject.exportObject(msgReceiver, 40000 + address!!.port) as NodeCommands
 
             // Create registry and (re)register object name and skeleton in it
-            val registry = LocateRegistry.createRegistry(proxiedAddress!!.port)
+            val registry = LocateRegistry.createRegistry(address!!.port)
             registry.rebind(COMM_INTERFACE_NAME, skeleton)
         } catch (e: Exception) {
             // Something is wrong ...
@@ -118,22 +116,22 @@ class Node(args: Array<String>) : Runnable {
 
 
     fun printStatus() {
-        println("Status: $this with address $proxiedAddress")
+        println("Status: $this with address $address")
         println("    with neighbours $neighbours")
     }
 
 
     override fun run() {
         nodeId = generateId(myIP, myPort)
-        proxiedAddress = Address(myIP, myPort)
-        neighbours = DSNeighbours(proxiedAddress!!)
+        address = Address(myIP, myPort)
+        neighbours = DSNeighbours(address!!)
         printStatus()
         messageReceiver = startMessageReceiver()
         commHub = CommunicationHub(this)
         myConsoleHandler = ConsoleHandler(this)
         // JOIN
         val tmpNode = commHub!!.getRMIProxy(Address(otherNodeIP, otherNodePort))
-        this.neighbours = tmpNode!!.join(this.proxiedAddress)
+        this.neighbours = tmpNode!!.join(this.address)
         commHub!!.setActNeighbours(this.neighbours)
         println("Neighbours after JOIN " + this.neighbours)
         Thread(myConsoleHandler).start()
@@ -151,9 +149,9 @@ class Node(args: Array<String>) : Runnable {
 
     fun sendHelloToBoth() {
         println("Sending Hello to both neighbours")
-        println("Sending Hello to ${commHub!!.right}}")
+        println("Sending Hello to ${commHub!!.right}")
         commHub!!.right!!.hello()
-        println("Sending Hello to ${commHub!!.left}}")
+        println("Sending Hello to ${commHub!!.left}")
         commHub!!.left!!.hello()
     }
 

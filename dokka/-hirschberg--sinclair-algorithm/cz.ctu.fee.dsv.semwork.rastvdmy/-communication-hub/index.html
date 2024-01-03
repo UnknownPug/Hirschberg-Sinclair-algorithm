@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>CommunicationHub</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            Hirschberg-Sinclair-algorithm
+                    </a>
+            </div>
+            <div class="library-version">
+            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter="Hirschberg-Sinclair-algorithm/JVM">JVM</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="Hirschberg-Sinclair-algorithm::cz.ctu.fee.dsv.semwork.rastvdmy/CommunicationHub///PointingToDeclaration//84264165">
+  <div class="breadcrumbs"><a href="../../../index.html">Hirschberg-Sinclair-algorithm</a><span class="delimiter">/</span><a href="../index.html">cz.ctu.fee.dsv.semwork.rastvdmy</a><span class="delimiter">/</span><span class="current">CommunicationHub</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Communication</span><wbr></wbr><span><span>Hub</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">CommunicationHub</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">node<span class="token operator">: </span><a href="../-node/index.html">Node</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><p class="paragraph">This class manages the communication between nodes in a distributed system. It provides methods to get the RMI proxy of a node and to set the current neighbours of a node.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="1394635606%2FConstructors%2F84264165" anchor-label="CommunicationHub" id="1394635606%2FConstructors%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-communication-hub.html"><span>Communication</span><wbr></wbr><span><span>Hub</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1394635606%2FConstructors%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">node<span class="token operator">: </span><a href="../-node/index.html">Node</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="2043354241%2FProperties%2F84264165" anchor-label="current" id="2043354241%2FProperties%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current.html"><span><span>current</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2043354241%2FProperties%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="current.html">current</a><span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-node-commands/index.html">NodeCommands</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Gets the RMI proxy of the current node.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1776670953%2FProperties%2F84264165" anchor-label="leader" id="-1776670953%2FProperties%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="leader.html"><span><span>leader</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1776670953%2FProperties%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="leader.html">leader</a><span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-node-commands/index.html">NodeCommands</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Gets the RMI proxy of the leader.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1814149785%2FProperties%2F84264165" anchor-label="left" id="1814149785%2FProperties%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="left.html"><span><span>left</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1814149785%2FProperties%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="left.html">left</a><span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-node-commands/index.html">NodeCommands</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Gets the RMI proxy of the left neighbour.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1226236487%2FProperties%2F84264165" anchor-label="nNext" id="-1226236487%2FProperties%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="n-next.html"><span>n</span><wbr></wbr><span><span>Next</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1226236487%2FProperties%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="n-next.html">nNext</a><span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-node-commands/index.html">NodeCommands</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Gets the RMI proxy of the next neighbour.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1637476478%2FProperties%2F84264165" anchor-label="right" id="1637476478%2FProperties%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="right.html"><span><span>right</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1637476478%2FProperties%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="right.html">right</a><span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-node-commands/index.html">NodeCommands</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Gets the RMI proxy of the right neighbour.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="920685275%2FFunctions%2F84264165" anchor-label="getRMIProxy" id="920685275%2FFunctions%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-r-m-i-proxy.html"><span>get</span><wbr></wbr><span><span>RMIProxy</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="920685275%2FFunctions%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-r-m-i-proxy.html"><span class="token function">getRMIProxy</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">proxiedAddress<span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-address/index.html">Address</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-node-commands/index.html">NodeCommands</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Gets the RMI proxy of a node with a given address.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1267448811%2FFunctions%2F84264165" anchor-label="setActNeighbours" id="1267448811%2FFunctions%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-act-neighbours.html"><span>set</span><wbr></wbr><span>Act</span><wbr></wbr><span><span>Neighbours</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1267448811%2FFunctions%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-act-neighbours.html"><span class="token function">setActNeighbours</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">actNeighbours<span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-d-s-neighbours/index.html">DSNeighbours</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sets the current neighbours of a node.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

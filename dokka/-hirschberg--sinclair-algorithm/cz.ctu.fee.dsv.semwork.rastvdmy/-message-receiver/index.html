@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>MessageReceiver</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            Hirschberg-Sinclair-algorithm
+                    </a>
+            </div>
+            <div class="library-version">
+            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter="Hirschberg-Sinclair-algorithm/JVM">JVM</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="Hirschberg-Sinclair-algorithm::cz.ctu.fee.dsv.semwork.rastvdmy/MessageReceiver///PointingToDeclaration//84264165">
+  <div class="breadcrumbs"><a href="../../../index.html">Hirschberg-Sinclair-algorithm</a><span class="delimiter">/</span><a href="../index.html">cz.ctu.fee.dsv.semwork.rastvdmy</a><span class="delimiter">/</span><span class="current">MessageReceiver</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Message</span><wbr></wbr><span><span>Receiver</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">MessageReceiver</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">node<span class="token operator">: </span><a href="../-node/index.html">Node</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span> : <a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-node-commands/index.html">NodeCommands</a></div><p class="paragraph">This class handles the receiving of messages for a node in a distributed system. It implements the NodeCommands interface to define the commands that a node can execute.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="-2108340252%2FConstructors%2F84264165" anchor-label="MessageReceiver" id="-2108340252%2FConstructors%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-message-receiver.html"><span>Message</span><wbr></wbr><span><span>Receiver</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2108340252%2FConstructors%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">node<span class="token operator">: </span><a href="../-node/index.html">Node</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-475829984%2FFunctions%2F84264165" anchor-label="candidature" id="-475829984%2FFunctions%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="candidature.html"><span><span>candidature</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-475829984%2FFunctions%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="candidature.html"><span class="token function">candidature</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">leaderId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">minDepth<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">maxDepth<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">senderAddress<span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-address/index.html">Address</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sends a candidature for the election.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1033765388%2FFunctions%2F84264165" anchor-label="changeNNext" id="-1033765388%2FFunctions%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="change-n-next.html"><span>change</span><wbr></wbr><span><span>NNext</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1033765388%2FFunctions%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="change-n-next.html"><span class="token function">changeNNext</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">addr<span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-address/index.html">Address</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Changes the next neighbour of a node.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-130888674%2FFunctions%2F84264165" anchor-label="changePrev" id="-130888674%2FFunctions%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="change-prev.html"><span>change</span><wbr></wbr><span><span>Prev</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-130888674%2FFunctions%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="change-prev.html"><span class="token function">changePrev</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">addr<span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-address/index.html">Address</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-address/index.html">Address</a></div><div class="brief "><p class="paragraph">Changes the previous neighbour of a node.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1467374434%2FFunctions%2F84264165" anchor-label="elected" id="-1467374434%2FFunctions%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="elected.html"><span><span>elected</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1467374434%2FFunctions%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="elected.html"><span class="token function">elected</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">winner<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">winnerAddress<span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-address/index.html">Address</a><span class="token punctuation">, </span></span><span class="parameter ">senderAddress<span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-address/index.html">Address</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Notifies that a node has been elected.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1112087009%2FFunctions%2F84264165" anchor-label="election" id="1112087009%2FFunctions%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="election.html"><span><span>election</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1112087009%2FFunctions%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="election.html"><span class="token function">election</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Starts an election in the distributed system.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1107626217%2FFunctions%2F84264165" anchor-label="hello" id="-1107626217%2FFunctions%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hello.html"><span><span>hello</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1107626217%2FFunctions%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="hello.html"><span class="token function">hello</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Prints hello was called to the console after being called.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1400830203%2FFunctions%2F84264165" anchor-label="join" id="-1400830203%2FFunctions%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="join.html"><span><span>join</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1400830203%2FFunctions%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="join.html"><span class="token function">join</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">addr<span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-address/index.html">Address</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-d-s-neighbours/index.html">DSNeighbours</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Joins a node to the distributed system.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1738522119%2FFunctions%2F84264165" anchor-label="nodeMissing" id="1738522119%2FFunctions%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="node-missing.html"><span>node</span><wbr></wbr><span><span>Missing</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1738522119%2FFunctions%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="node-missing.html"><span class="token function">nodeMissing</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">addr<span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-address/index.html">Address</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Notifies that a node is missing in the distributed system.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1164401126%2FFunctions%2F84264165" anchor-label="register" id="-1164401126%2FFunctions%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="register.html"><span><span>register</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1164401126%2FFunctions%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="register.html"><span class="token function">register</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">nickName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">addr<span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-address/index.html">Address</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Registers a node in the distributed system.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1313179705%2FFunctions%2F84264165" anchor-label="response" id="-1313179705%2FFunctions%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="response.html"><span><span>response</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1313179705%2FFunctions%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="response.html"><span class="token function">response</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">isPositiveResponse<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">id<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">senderAddress<span class="token operator">: </span><a href="../../cz.ctu.fee.dsv.semwork.rastvdmy.base/-address/index.html">Address</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sends a response to a candidature.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1022150537%2FFunctions%2F84264165" anchor-label="sendMessage" id="1022150537%2FFunctions%2F84264165" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM"></a>
+          <div class="table-row" data-filterable-current="Hirschberg-Sinclair-algorithm/JVM" data-filterable-set="Hirschberg-Sinclair-algorithm/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="send-message.html"><span>send</span><wbr></wbr><span><span>Message</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1022150537%2FFunctions%2F84264165"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="Hirschberg-Sinclair-algorithm/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="send-message.html"><span class="token function">sendMessage</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">toNickName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">fromNickName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">message<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sends a message to a node.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

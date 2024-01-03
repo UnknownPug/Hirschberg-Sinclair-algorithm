@@ -7,6 +7,10 @@ import java.io.PrintStream
 
 /* Source: https://moodle.fel.cvut.cz/pluginfile.php/410384/mod_label/intro/TestSem_v0.1.zip */
 
+/**
+ * This class handles console input and output for a node in a distributed system.
+ * It implements the Runnable interface to allow it to be run in a separate thread.
+ */
 class ConsoleHandler(private val myNode: Node) : Runnable {
     private var reading = true
     private var reader: BufferedReader? = null
@@ -16,6 +20,11 @@ class ConsoleHandler(private val myNode: Node) : Runnable {
         reader = BufferedReader(InputStreamReader(System.`in`))
     }
 
+    /**
+     * Parses a command line input and executes the corresponding command.
+     *
+     * @param commandline The command line input to parse.
+     */
     private fun parseCommandline(commandline: String) {
         when (commandline) {
             "h" -> {
@@ -25,9 +34,9 @@ class ConsoleHandler(private val myNode: Node) : Runnable {
                 myNode.printStatus()
             }
             "?" -> {
-                print("? - this help")
-                print("h - send Hello message to Next neighbour")
-                print("s - print node status")
+                print("? - showing all available commands\n")
+                print("h - send Hello message to both neighbours\n")
+                print("s - print node status\n")
             }
             else -> {
                 // do nothing
@@ -36,7 +45,10 @@ class ConsoleHandler(private val myNode: Node) : Runnable {
         }
     }
 
-
+    /**
+     * The main loop of the ConsoleHandler.
+     * It reads command line inputs and parses them until an error occurs or the reading flag is set to false.
+     */
     override fun run() {
         var commandline: String
         while (reading) {
@@ -45,7 +57,7 @@ class ConsoleHandler(private val myNode: Node) : Runnable {
                 commandline = reader!!.readLine()
                 parseCommandline(commandline)
             } catch (e: IOException) {
-                err.println("ConsoleHandler - error in rading console input.")
+                err.println("ConsoleHandler - error in reading console input.")
                 e.printStackTrace()
                 reading = false
             }
