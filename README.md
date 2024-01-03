@@ -6,7 +6,7 @@
 
 ### Java version: 21
 
-#### ● Project also contains [Dokka - Kotlin documentation]()
+#### ● Project also contains [Dokka - Kotlin documentation](https://github.com/UnknownPug/Hirschberg-Sinclair-algorithm/tree/main/dokka)
 
 ## Contents
 
@@ -19,6 +19,7 @@
 -- -- --
 
 ### <a name="image"></a> Image
+![Hirshberg-Sinclair algorithm image](https://github.com/UnknownPug/Hirschberg-Sinclair-algorithm/assets/73190129/d9fcfccd-3a34-4575-8b05-909eb9fc44ad)
 
 -- -- --
 
