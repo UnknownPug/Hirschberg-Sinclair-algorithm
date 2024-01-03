@@ -37,8 +37,7 @@ algorithm designed for a leader election problem
 in a synchronous ring network.
 
 Also, I was inspired by the lectures of lecturer **Ing. Peter
-Macejko
-** [Algorithms for leader selection (symmetry breaking)](https://moodle.fel.cvut.cz/pluginfile.php/410378/mod_label/intro/dsv_pr.07_LE_v2.3_en.pdf)
+Macejko** [Algorithms for leader selection (symmetry breaking)](https://moodle.fel.cvut.cz/pluginfile.php/410378/mod_label/intro/dsv_pr.07_LE_v2.3_en.pdf)
 Where the lecturer explained and demonstrated the essence of the algorithm.
 
 -- -- --
