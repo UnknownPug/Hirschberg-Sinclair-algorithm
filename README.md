@@ -157,7 +157,7 @@ Example:
         h - send Hello message to both neighbours
         s - print node status
 
-If we will another non-existing command, we will get a message ```Unrecognized command.``` 
+If we will try to enter another non-existing command, we will get a message ```Unrecognized command.``` 
 
 -- -- --
 Thank you for your attention! Happy coding :-)
