@@ -95,6 +95,7 @@ class MessageReceiver(node: Node?) : NodeCommands {
     override fun nodeMissing(addr: Address?) {
         println("NodeMissing was called with $addr")
         if (addr!!.compareTo(myNode!!.neighbours!!.right) == 0) {
+            // readln() // Waiting for the user to press entering (blocking the nodes for an election process)
             // It's for me
             val myNeighbours = myNode!!.neighbours
             // to my nnext send msg ChPrev with myaddr -> my nnext = next
