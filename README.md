@@ -7,6 +7,7 @@
 ### Java version: 21
 
 #### ● Project also contains [Dokka - Kotlin documentation](https://unknownpug.github.io/Hirschberg-Sinclair-algorithm/dokka/index.html)
+#### ● And also [Documentation in Czech language]()
 
 ## Contents
 
