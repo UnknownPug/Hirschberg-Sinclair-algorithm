@@ -120,4 +120,7 @@ interface NodeCommands : Remote {
      */
     @Throws(RemoteException::class)
     fun hello()
+
+    @Throws(RemoteException::class)
+    fun receiveMessage(message: String)
 }

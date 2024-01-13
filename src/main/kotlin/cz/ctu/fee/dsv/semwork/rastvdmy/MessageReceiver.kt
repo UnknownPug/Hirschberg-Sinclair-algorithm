@@ -273,6 +273,7 @@ class MessageReceiver(node: Node?) : NodeCommands {
      */
     @Throws(RemoteException::class)
     override fun sendMessage(toNickName: String?, fromNickName: String?, message: String?) {
+        println("Message was sent to $toNickName from $fromNickName: $message")
     }
 
     @Throws(RemoteException::class)
@@ -285,5 +286,9 @@ class MessageReceiver(node: Node?) : NodeCommands {
     @Throws(RemoteException::class)
     override fun hello() {
         println("Hello was called ...")
+    }
+
+    override fun receiveMessage(message: String) {
+        println("Message was received: $message")
     }
 }

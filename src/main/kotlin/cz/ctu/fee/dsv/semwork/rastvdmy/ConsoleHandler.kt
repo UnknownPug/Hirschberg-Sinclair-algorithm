@@ -30,12 +30,20 @@ class ConsoleHandler(private val myNode: Node) : Runnable {
             "h" -> {
                 myNode.sendHelloToBoth()
             }
+            "m" -> {
+                println("Enter the node address to which you want to send a message:")
+                val address = reader!!.readLine()
+                println("Enter the message:")
+                val message = reader!!.readLine()
+                myNode.sendMessage(address, message)
+            }
             "s" -> {
                 myNode.printStatus()
             }
             "?" -> {
                 print("? - showing all available commands\n")
                 print("h - send Hello message to both neighbours\n")
+                print("m - send message to a node\n")
                 print("s - print node status\n")
             }
             else -> {

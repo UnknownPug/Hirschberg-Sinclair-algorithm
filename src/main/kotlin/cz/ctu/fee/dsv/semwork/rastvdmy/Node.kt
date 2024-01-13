@@ -155,6 +155,19 @@ class Node(args: Array<String>) : Runnable {
         commHub!!.left!!.hello()
     }
 
+    fun sendMessage(address: String?, message: String?) {
+        if (address == null || message == null) {
+            println("Wrong parameters")
+            return
+        }
+        val receiver = commHub!!.getRMIProxy(Address(address))
+        if (receiver == null) {
+            println("Receiver is not available")
+            return
+        }
+        receiver.receiveMessage(message)
+    }
+
     companion object {
         // Using logger is strongly recommended (log4j, ...)
         // Name of our RMI "service"
