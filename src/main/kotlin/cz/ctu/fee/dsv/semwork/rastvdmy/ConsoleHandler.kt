@@ -31,17 +31,13 @@ class ConsoleHandler(private val myNode: Node) : Runnable {
                 myNode.sendHelloToBoth()
             }
             "m" -> {
+                println("Enter the node address to which you want to send a message:")
+                val address = reader!!.readLine()
                 println("Enter the port of the node to which you want to send a message:")
-                val portInput = reader!!.readLine()
-                val port = portInput.toIntOrNull()
-                if (port == null) {
-                    println("Invalid port input")
-                    return
-                }
-
+                val port = reader!!.readLine()
                 println("Enter the message:")
                 val message = reader!!.readLine()
-                myNode.sendMessageByPort(port, message)
+                myNode.sendMessage(address, port, message)
             }
             "s" -> {
                 myNode.printStatus()

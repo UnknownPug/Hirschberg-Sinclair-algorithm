@@ -5,14 +5,10 @@ import cz.ctu.fee.dsv.semwork.rastvdmy.base.DSNeighbours
 import cz.ctu.fee.dsv.semwork.rastvdmy.base.NodeCommands
 import java.rmi.registry.LocateRegistry
 import java.rmi.server.UnicastRemoteObject
-import kotlin.math.abs
 
 /* Source: https://moodle.fel.cvut.cz/pluginfile.php/410384/mod_label/intro/TestSem_v0.1.zip */
 
 class Node(args: Array<String>) : Runnable {
-
-    // Map to store the correspondence between port numbers and node addresses
-    private val portToNodeMap: MutableMap<Int, Address> = mutableMapOf()
 
     // Node state
     var state: State = State.NOT_INVOLVED
@@ -61,29 +57,6 @@ class Node(args: Array<String>) : Runnable {
                 System.err.println("Wrong number of commandline parameters - using default values.")
             }
         }
-        // Populate the portToNodeMap with the initial node's information
-        portToNodeMap[myPort] = Address(myIP, myPort)
-    }
-
-    private fun addNode(port: Int, address: Address) {
-        portToNodeMap[port] = address
-    }
-
-    fun sendMessageByPort(port: Int, message: String?) {
-        val closestPort = portToNodeMap.keys.minByOrNull { abs(it - port) }
-        if (closestPort == null) {
-            println("No node found for port $port")
-            return
-        }
-
-        val receiverAddress = portToNodeMap[closestPort]
-        val receiver = commHub!!.getRMIProxy(receiverAddress!!)
-        if (receiver == null) {
-            println("Receiver is not available")
-            return
-        }
-
-        receiver.receiveMessage(message!!)
     }
 
     private fun generateId(myIP: String, port: Int): Long {
@@ -147,7 +120,6 @@ class Node(args: Array<String>) : Runnable {
         println("    with neighbours $neighbours")
     }
 
-
     override fun run() {
         nodeId = generateId(myIP, myPort)
         address = Address(myIP, myPort)
@@ -160,7 +132,6 @@ class Node(args: Array<String>) : Runnable {
         val tmpNode = commHub!!.getRMIProxy(Address(otherNodeIP, otherNodePort))
         this.neighbours = tmpNode!!.join(this.address)
         commHub!!.setActNeighbours(this.neighbours)
-        addNode(otherNodePort, Address(otherNodeIP, otherNodePort))
         println("Neighbours after JOIN " + this.neighbours)
         Thread(myConsoleHandler).start()
     }
@@ -183,18 +154,18 @@ class Node(args: Array<String>) : Runnable {
         commHub!!.left!!.hello()
     }
 
-//    fun sendMessage(address: String?, port: String, message: String?) {
-//        if (address == null || message == null) {
-//            println("Wrong parameters")
-//            return
-//        }
-//        val receiver = commHub!!.getRMIProxy(Address(address, port.toInt()))
-//        if (receiver == null) {
-//            println("Receiver is not available")
-//            return
-//        }
-//        receiver.receiveMessage(message)
-//    }
+    fun sendMessage(address: String?, port: String, message: String?) {
+        if (address == null || message == null) {
+            println("Wrong parameters")
+            return
+        }
+        val receiver = commHub!!.getRMIProxy(Address(address, port.toInt()))
+        if (receiver == null) {
+            println("Receiver is not available")
+            return
+        }
+        receiver.receiveMessage(message)
+    }
 
     companion object {
         // Using logger is strongly recommended (log4j, ...)
