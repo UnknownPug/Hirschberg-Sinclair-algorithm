@@ -33,9 +33,11 @@ class ConsoleHandler(private val myNode: Node) : Runnable {
             "m" -> {
                 println("Enter the node address to which you want to send a message:")
                 val address = reader!!.readLine()
+                println("Enter the port of the node to which you want to send a message:")
+                val port = reader!!.readLine()
                 println("Enter the message:")
                 val message = reader!!.readLine()
-                myNode.sendMessage(address, message)
+                myNode.sendMessage(address, port, message)
             }
             "s" -> {
                 myNode.printStatus()

@@ -155,12 +155,12 @@ class Node(args: Array<String>) : Runnable {
         commHub!!.left!!.hello()
     }
 
-    fun sendMessage(address: String?, message: String?) {
+    fun sendMessage(address: String?, port: String, message: String?) {
         if (address == null || message == null) {
             println("Wrong parameters")
             return
         }
-        val receiver = commHub!!.getRMIProxy(Address(address))
+        val receiver = commHub!!.getRMIProxy(Address(address, port.toInt()))
         if (receiver == null) {
             println("Receiver is not available")
             return
