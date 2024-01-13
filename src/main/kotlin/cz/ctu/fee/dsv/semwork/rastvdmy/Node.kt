@@ -5,6 +5,7 @@ import cz.ctu.fee.dsv.semwork.rastvdmy.base.DSNeighbours
 import cz.ctu.fee.dsv.semwork.rastvdmy.base.NodeCommands
 import java.rmi.registry.LocateRegistry
 import java.rmi.server.UnicastRemoteObject
+import kotlin.math.abs
 
 /* Source: https://moodle.fel.cvut.cz/pluginfile.php/410384/mod_label/intro/TestSem_v0.1.zip */
 
@@ -69,20 +70,20 @@ class Node(args: Array<String>) : Runnable {
     }
 
     fun sendMessageByPort(port: Int, message: String?) {
-        val receiverAddress = portToNodeMap[port]
-        if (receiverAddress == null) {
+        val closestPort = portToNodeMap.keys.minByOrNull { abs(it - port) }
+        if (closestPort == null) {
             println("No node found for port $port")
             return
         }
 
-        val receiver = commHub!!.getRMIProxy(receiverAddress)
+        val receiverAddress = portToNodeMap[closestPort]
+        val receiver = commHub!!.getRMIProxy(receiverAddress!!)
         if (receiver == null) {
             println("Receiver is not available")
             return
         }
-        if (message != null) {
-            receiver.receiveMessage(message)
-        }
+
+        receiver.receiveMessage(message!!)
     }
 
     private fun generateId(myIP: String, port: Int): Long {
