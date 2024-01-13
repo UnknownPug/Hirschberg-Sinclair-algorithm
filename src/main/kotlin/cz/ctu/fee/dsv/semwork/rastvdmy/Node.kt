@@ -10,6 +10,9 @@ import java.rmi.server.UnicastRemoteObject
 
 class Node(args: Array<String>) : Runnable {
 
+    // Map to store the correspondence between port numbers and node addresses
+    private val portToNodeMap: MutableMap<Int, Address> = mutableMapOf()
+
     // Node state
     var state: State = State.NOT_INVOLVED
 
@@ -56,6 +59,29 @@ class Node(args: Array<String>) : Runnable {
                 // something is wrong - use default values
                 System.err.println("Wrong number of commandline parameters - using default values.")
             }
+        }
+        // Populate the portToNodeMap with the initial node's information
+        portToNodeMap[myPort] = Address(myIP, myPort)
+    }
+
+    private fun addNode(port: Int, address: Address) {
+        portToNodeMap[port] = address
+    }
+
+    fun sendMessageByPort(port: Int, message: String?) {
+        val receiverAddress = portToNodeMap[port]
+        if (receiverAddress == null) {
+            println("No node found for port $port")
+            return
+        }
+
+        val receiver = commHub!!.getRMIProxy(receiverAddress)
+        if (receiver == null) {
+            println("Receiver is not available")
+            return
+        }
+        if (message != null) {
+            receiver.receiveMessage(message)
         }
     }
 
@@ -133,6 +159,7 @@ class Node(args: Array<String>) : Runnable {
         val tmpNode = commHub!!.getRMIProxy(Address(otherNodeIP, otherNodePort))
         this.neighbours = tmpNode!!.join(this.address)
         commHub!!.setActNeighbours(this.neighbours)
+        addNode(otherNodePort, Address(otherNodeIP, otherNodePort))
         println("Neighbours after JOIN " + this.neighbours)
         Thread(myConsoleHandler).start()
     }
@@ -155,18 +182,18 @@ class Node(args: Array<String>) : Runnable {
         commHub!!.left!!.hello()
     }
 
-    fun sendMessage(address: String?, port: String, message: String?) {
-        if (address == null || message == null) {
-            println("Wrong parameters")
-            return
-        }
-        val receiver = commHub!!.getRMIProxy(Address(address, port.toInt()))
-        if (receiver == null) {
-            println("Receiver is not available")
-            return
-        }
-        receiver.receiveMessage(message)
-    }
+//    fun sendMessage(address: String?, port: String, message: String?) {
+//        if (address == null || message == null) {
+//            println("Wrong parameters")
+//            return
+//        }
+//        val receiver = commHub!!.getRMIProxy(Address(address, port.toInt()))
+//        if (receiver == null) {
+//            println("Receiver is not available")
+//            return
+//        }
+//        receiver.receiveMessage(message)
+//    }
 
     companion object {
         // Using logger is strongly recommended (log4j, ...)
