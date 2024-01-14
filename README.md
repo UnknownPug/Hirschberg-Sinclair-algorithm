@@ -153,11 +153,11 @@ Example:
 
         cmd > m
         Enter the node address to which you want to send a message:
-        sdadasdsadasdas
+        happydogswimminghomewithabone
         Enter the port of the node to which you want to send a message:
-        sadasdasd
+        2070
         Enter the message:
-        Hello world!
+        [empty]
         
         Wrong parameters
 
