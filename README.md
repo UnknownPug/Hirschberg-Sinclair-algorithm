@@ -147,6 +147,20 @@ Example:
 
 And when we go to the receiving node, we will see the message: ``Message was received: Hello world!``
 
+If we try to send non-existing node (ip address, port) or empty ip address or port, we will get an error message.
+
+Example:
+
+        cmd > m
+        Enter the node address to which you want to send a message:
+        sdadasdsadasdas
+        Enter the port of the node to which you want to send a message:
+        sadasdasd
+        Enter the message:
+        Hello world!
+        
+        Wrong parameters
+
 ```shell
 s
 ```

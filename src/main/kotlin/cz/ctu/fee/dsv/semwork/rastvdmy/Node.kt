@@ -157,8 +157,8 @@ class Node(args: Array<String>) : Runnable {
     }
 
 fun sendMessage(address: String?, port: String, message: String?) {
-    if (address == null || message == null) {
-        println("Wrong parameters")
+    if (address.isNullOrEmpty() || message.isNullOrEmpty() || port.isEmpty()) {
+        println("Wrong parameters. Please try again.")
         return
     }
 
