@@ -3,6 +3,8 @@ package cz.ctu.fee.dsv.semwork.rastvdmy
 import cz.ctu.fee.dsv.semwork.rastvdmy.base.Address
 import cz.ctu.fee.dsv.semwork.rastvdmy.base.DSNeighbours
 import cz.ctu.fee.dsv.semwork.rastvdmy.base.NodeCommands
+import java.io.IOException
+import java.net.*
 import java.rmi.registry.LocateRegistry
 import java.rmi.server.UnicastRemoteObject
 
@@ -154,18 +156,41 @@ class Node(args: Array<String>) : Runnable {
         commHub!!.left!!.hello()
     }
 
-    fun sendMessage(address: String?, port: String, message: String?) {
-        if (address == null || message == null) {
-            println("Wrong parameters")
-            return
-        }
-        val receiver = commHub!!.getRMIProxy(Address(address, port.toInt()))
-        if (receiver == null) {
-            println("Receiver is not available")
-            return
-        }
-        receiver.receiveMessage(message)
+fun sendMessage(address: String?, port: String, message: String?) {
+    if (address == null || message == null) {
+        println("Wrong parameters")
+        return
     }
+
+    try {
+        InetAddress.getByName(address) // This will throw an exception if the IP address is not valid
+        port.toInt() // This will throw an exception if the port is not a valid integer
+    } catch (e: UnknownHostException) {
+        println("Invalid IP address")
+        return
+    } catch (e: NumberFormatException) {
+        println("Invalid port number")
+        return
+    }
+
+    try {
+        Socket().use { socket ->
+            socket.connect(InetSocketAddress(address, port.toInt()), 2000)
+            if (socket.isConnected) {
+                val receiver = commHub!!.getRMIProxy(Address(address, port.toInt()))
+                if (receiver == null) {
+                    println("Receiver is not available")
+                    return
+                }
+                receiver.receiveMessage(message)
+            } else {
+                println("Port does not exist on the given address")
+            }
+        }
+    } catch (e: IOException) {
+        println("This address does not exist")
+    }
+}
 
     companion object {
         // Using logger is strongly recommended (log4j, ...)
