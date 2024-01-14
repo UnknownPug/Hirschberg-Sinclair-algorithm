@@ -128,6 +128,25 @@ Sending node:
 
 Receiving node: ```Hello was called ...```
 
+
+```shell
+m
+```
+
+It will send a message to the node, which ip address and node will be chosen.
+
+Example:
+
+        cmd > m
+        Enter the node address to which you want to send a message:
+        127.0.0.1
+        Enter the port of the node to which you want to send a message:
+        2030
+        Enter the message:
+        Hello world!
+
+And when we go to the receiving node, we will see the message: ``Message was received: Hello world!``
+
 ```shell
 s
 ```
