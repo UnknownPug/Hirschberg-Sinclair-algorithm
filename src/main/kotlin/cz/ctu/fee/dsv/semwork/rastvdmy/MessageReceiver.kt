@@ -266,14 +266,13 @@ class MessageReceiver(node: Node?) : NodeCommands {
     /**
      * Sends a message to a node.
      *
-     * @param toNickName The nickname of the recipient.
      * @param fromNickName The nickname of the sender.
      * @param message The message to send.
      * @throws RemoteException If a remote access error occurs.
      */
     @Throws(RemoteException::class)
-    override fun sendMessage(toNickName: String?, fromNickName: String?, message: String?) {
-        println("Message was sent to $toNickName from $fromNickName: $message")
+    override fun sendMessage(fromNickName: String?, message: String?) {
+        println("Message was sent from $fromNickName: $message")
     }
 
     @Throws(RemoteException::class)
@@ -288,7 +287,13 @@ class MessageReceiver(node: Node?) : NodeCommands {
         println("Hello was called ...")
     }
 
+    @Throws(RemoteException::class)
     override fun receiveMessage(message: String) {
         println("Message was received: $message")
+    }
+
+    @Throws(RemoteException::class)
+    override fun notifyMessageSent(sender: String, receiver: String, message: String) {
+        println("Message was sent from $sender to $receiver: $message")
     }
 }

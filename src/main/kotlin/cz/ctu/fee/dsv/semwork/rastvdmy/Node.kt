@@ -3,8 +3,9 @@ package cz.ctu.fee.dsv.semwork.rastvdmy
 import cz.ctu.fee.dsv.semwork.rastvdmy.base.Address
 import cz.ctu.fee.dsv.semwork.rastvdmy.base.DSNeighbours
 import cz.ctu.fee.dsv.semwork.rastvdmy.base.NodeCommands
-import java.io.IOException
-import java.net.*
+import java.net.InetAddress
+import java.net.UnknownHostException
+import java.rmi.RemoteException
 import java.rmi.registry.LocateRegistry
 import java.rmi.server.UnicastRemoteObject
 
@@ -172,23 +173,21 @@ fun sendMessage(address: String?, port: String, message: String?) {
         println("Invalid port number")
         return
     }
-
     try {
-        Socket().use { socket ->
-            socket.connect(InetSocketAddress(address, port.toInt()), 2000)
-            if (socket.isConnected) {
-                val receiver = commHub!!.getRMIProxy(Address(address, port.toInt()))
-                if (receiver == null) {
-                    println("Receiver is not available")
-                    return
-                }
-                receiver.receiveMessage(message)
-            } else {
-                println("Port does not exist on the given address")
-            }
+        val receiver = commHub!!.getRMIProxy(Address(address, port.toInt()))
+        if (receiver == null) {
+            println("Receiver is not available")
+            return
         }
-    } catch (e: IOException) {
-        println("This address does not exist")
+        val leaderNode = commHub!!.leader
+        if (leaderNode != null) {
+            leaderNode.notifyMessageSent(address, receiver.toString(), message)
+        } else {
+            println("Leader node is not available")
+        }
+        receiver.sendMessage(nickname, message)
+    } catch (e: RemoteException) {
+        println("Failed to send message: ${e.message}")
     }
 }
 

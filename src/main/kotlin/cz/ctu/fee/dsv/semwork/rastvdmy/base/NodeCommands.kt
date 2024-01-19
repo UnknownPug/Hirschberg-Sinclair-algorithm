@@ -95,13 +95,12 @@ interface NodeCommands : Remote {
     /**
      * Sends a message to a node.
      *
-     * @param toNickName The nickname of the recipient.
      * @param fromNickName The nickname of the sender.
      * @param message The message to send.
      * @throws RemoteException If a remote access error occurs.
      */
     @Throws(RemoteException::class)
-    fun sendMessage(toNickName: String?, fromNickName: String?, message: String?)
+    fun sendMessage(fromNickName: String?, message: String?)
 
     /**
      * Registers a node in the distributed system.
@@ -123,4 +122,7 @@ interface NodeCommands : Remote {
 
     @Throws(RemoteException::class)
     fun receiveMessage(message: String)
+
+    @Throws(RemoteException::class)
+    fun notifyMessageSent(sender: String, receiver: String, message: String)
 }
