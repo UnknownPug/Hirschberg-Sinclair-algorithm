@@ -157,39 +157,47 @@ class Node(args: Array<String>) : Runnable {
         commHub!!.left!!.hello()
     }
 
-fun sendMessage(address: String?, port: String, message: String?) {
-    if (address.isNullOrEmpty() || message.isNullOrEmpty() || port.isEmpty()) {
-        println("Wrong parameters. Please try again.")
-        return
-    }
-
-    try {
-        InetAddress.getByName(address) // This will throw an exception if the IP address is not valid
-        port.toInt() // This will throw an exception if the port is not a valid integer
-    } catch (e: UnknownHostException) {
-        println("Invalid IP address")
-        return
-    } catch (e: NumberFormatException) {
-        println("Invalid port number")
-        return
-    }
-    try {
-        val receiver = commHub!!.getRMIProxy(Address(address, port.toInt()))
-        if (receiver == null) {
-            println("Receiver is not available")
+    fun sendMessage(address: String?, port: String, message: String?) {
+        if (address.isNullOrEmpty() || message.isNullOrEmpty() || port.isEmpty()) {
+            println("Wrong parameters. Please try again.")
             return
         }
-        val leaderNode = commHub!!.leader
-        if (leaderNode != null) {
-            leaderNode.notifyMessageSent(address, receiver.toString(), message)
-        } else {
-            println("Leader node is not available")
+        try {
+            InetAddress.getByName(address) // This will throw an exception if the IP address is not valid
+            val targetPort = port.toInt() // This will throw an exception if the port is not a valid integer
+
+            // Check if the target node exists
+            if (!isNodeExist(address, targetPort)) {
+                println("Host with port $port does not exist.")
+                return
+            }
+            val leaderNode = commHub!!.leader
+            if (leaderNode != null) {
+                println("Sending message from $nickname to leader")
+                leaderNode.forwardMessage(nickname, address, targetPort, message)
+            } else {
+                println("Leader node is not available")
+            }
+        } catch (e: UnknownHostException) {
+            println("Invalid IP address")
+        } catch (e: NumberFormatException) {
+            println("Invalid port number")
+        } catch (e: RemoteException) {
+            println("Failed to send message: ${e.message}")
         }
-        receiver.sendMessage(nickname, message)
-    } catch (e: RemoteException) {
-        println("Failed to send message: ${e.message}")
     }
-}
+
+    private fun isNodeExist(address: String, port: Int): Boolean {
+        try {
+            val registry = LocateRegistry.getRegistry(address, port)
+            registry.lookup(COMM_INTERFACE_NAME) as NodeCommands
+            // If no exception is thrown, the node exists
+            return true
+        } catch (e: Exception) {
+            // An exception is thrown if the node does not exist
+            return false
+        }
+    }
 
     companion object {
         // Using logger is strongly recommended (log4j, ...)

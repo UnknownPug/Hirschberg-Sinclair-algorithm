@@ -280,8 +280,8 @@ class MessageReceiver(node: Node?) : NodeCommands {
     }
 
     /**
-    * Prints hello was called to the console after being called.
-    */
+     * Prints hello was called to the console after being called.
+     */
     @Throws(RemoteException::class)
     override fun hello() {
         println("Hello was called ...")
@@ -293,7 +293,15 @@ class MessageReceiver(node: Node?) : NodeCommands {
     }
 
     @Throws(RemoteException::class)
-    override fun notifyMessageSent(sender: String, receiver: String, message: String) {
-        println("Message was sent from $sender to $receiver: $message")
+    override fun forwardMessage(fromNickName: String?, toAddress: String, toPort: Int, message: String?) {
+        try {
+            println("Redirecting message from $fromNickName to $toAddress:$toPort")
+            val receiver =
+                myNode!!.commHub!!.getRMIProxy(Address(toAddress, toPort)) // directly get the receiver's proxy
+            receiver?.sendMessage(fromNickName, message)
+            println("Message was sent from $fromNickName: $message")
+        } catch (e: RemoteException) {
+            println("Failed to forward message: ${e.message}")
+        }
     }
 }

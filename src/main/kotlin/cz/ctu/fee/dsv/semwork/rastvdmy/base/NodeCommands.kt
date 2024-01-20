@@ -120,9 +120,24 @@ interface NodeCommands : Remote {
     @Throws(RemoteException::class)
     fun hello()
 
+    /**
+     * Receives a message from another node in the distributed system.
+     *
+     * @param message The message received.
+     * @throws RemoteException If a remote access error occurs.
+     */
     @Throws(RemoteException::class)
     fun receiveMessage(message: String)
 
+    /**
+     * Forwards a message from one node to another in the distributed system.
+     *
+     * @param fromNickName The nickname of the sender node.
+     * @param toAddress The address of the recipient node.
+     * @param toPort The port of the recipient node.
+     * @param message The message to be forwarded.
+     * @throws RemoteException If a remote access error occurs.
+     */
     @Throws(RemoteException::class)
-    fun notifyMessageSent(sender: String, receiver: String, message: String)
+    fun forwardMessage(fromNickName: String?, toAddress: String, toPort: Int, message: String?)
 }
