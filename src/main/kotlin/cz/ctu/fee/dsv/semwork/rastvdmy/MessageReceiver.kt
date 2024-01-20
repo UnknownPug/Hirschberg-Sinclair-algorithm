@@ -299,7 +299,7 @@ class MessageReceiver(node: Node?) : NodeCommands {
             val receiver =
                 myNode!!.commHub!!.getRMIProxy(Address(toAddress, toPort)) // directly get the receiver's proxy
             receiver?.sendMessage(fromNickName, message)
-            println("Message was sent from $fromNickName: $message")
+//            println("Message was sent from $fromNickName: $message")
         } catch (e: RemoteException) {
             println("Failed to forward message: ${e.message}")
         }
