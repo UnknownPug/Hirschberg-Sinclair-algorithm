@@ -193,6 +193,3 @@ Example:
         s - print node status
 
 If we try to enter another non-existing command, we will get a message ```Unrecognized command.``` 
-
--- -- --
-Thank you for your attention! Happy coding :-)
